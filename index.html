@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly home</title>
+  
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    /* ---------- Global custom styles ---------- */
+    :root {
+      --accent: #06b6d4; /* cyan-400 */
+      --muted: #9ca3af;
+      --card: #0f1724; /* dark card */
+    }
+
+    /* Smooth entrance animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .9s cubic-bezier(.2,.9,.2,1) both; }
+
+    @keyframes fadeScale {
+      from { opacity: 0; transform: translateY(24px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .fade-scale { animation: fadeScale 1s ease both; }
+
+    /* Subtle float on cards */
+    .card-hover { transition: transform .35s ease, box-shadow .35s ease; }
+    .card-hover:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 40px rgba(2,6,23,.6); }
+
+    /* Desktop dropdown style */
+    .dropdown-panel { min-width: 11rem; }
+
+    /* Hero overlay & text shadow */
+    .hero-overlay { background: linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.75)); }
+    .glow { text-shadow: 0 6px 30px rgba(6,182,212,0.08); }
+
+    /* Responsive tweaks */
+    @media (min-width:768px) {
+      .nav-center { left: 50%; transform: translateX(-50%); }
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus { outline: 3px solid rgba(6,182,212,0.18); outline-offset: 2px; }
+
+    /* small utils */
+    .muted { color: var(--muted); }
+
+    .what-we-do {
+    padding: 60px 20px;
+    text-align: center;
+    background: #050505; /* or remove if you want full black page */
+}
+
+.what-we-do h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #d8d8e1;
+    margin-bottom: 15px;
+}
+
+.what-we-do p {
+    color: #9eb5c7;
+    font-size: 18px;
+}
+/* Custom breakpoint: show desktop menu only at ≥1117px */
+@media (min-width: 1117px) {
+  .xl2\:flex {
+    display: flex !important;
+  }
+  .xl2\:hidden {
+    display: none !important;
+  }
+}
+.nav-active {
+  color: cyan !important;
+}
+
+
+
+  </style>
+</head>
+<body class="font-inter antialiased bg-black text-white">
+
+ 
+<!-- HEADER -->
+<header class="header fixed top-0 left-0 w-full z-50 bg-black shadow h-20 flex items-center">
+  <div class="max-w-7xl w-full mx-auto px-6 flex items-center justify-between h-full">
+
+    <!-- LOGO -->
+    <a href="index.html" class="flex items-center gap-3">
+  <img src="stackly.webp" class="w-40 h-40 object-contain" alt="Stackly logo">
+</a>
+
+    <!-- DESKTOP MENU (only visible above 1117px) -->
+    <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
+      <div class="relative group">
+       <button onclick="toggleMobileDrop()" class="flex items-center justify-between w-full py-2 nav-active">
+    <span>Home</span>
+    <i class="fa-solid fa-chevron-down text-sm"></i>
+</button>
+
+
+        <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
+             w-36 top-full pt-3 z-50">
+          <a href="home2.html" class="block px-4 py-2 hover:bg-gray-800 nav-link">Home 2</a>
+        </div>
+      </div>
+
+      <a href="about.html" class="nav-link hover:text-cyan-400">About</a>
+      <a href="services.html" class="nav-link hover:text-cyan-400">Services</a>
+      <a href="Dashboard.html" class="hover:text-cyan-300">dashboard📊</a>
+      <a href="contact.html" class="nav-link hover:text-cyan-400">Contact📞</a>
+
+      <a href="login.html" class="px-5 py-2 bg-cyan-500 text-black rounded-lg hover:bg-cyan-400 nav-link">
+        LOGIN
+      </a>
+    </nav>
+
+    <!-- MOBILE HAMBURGER (visible up to 1117px) -->
+    <button id="hamburgerBtn" class="xl2:hidden p-2 rounded-md">
+      <i class="fa-solid fa-bars text-2xl text-white"></i>
+    </button>
+
+  </div>
+</header>
+
+  
+  <!-- ================= MOBILE MENU ================= -->
+  <nav id="mobileMenu" class="hidden fixed inset-x-0 top-20 z-40 bg-black text-white border-t border-gray-800 shadow-lg">
+    <div class="px-6 py-6 flex flex-col gap-4 text-lg font-semibold">
+
+     <!-- DROPDOWN BUTTON -->
+    <button onclick="toggleMobileDrop()" 
+            class="flex items-center justify-between w-full">
+            <a href="index.html" class="hover:text-cyan-300">Home</a>
+      <i class="fa-solid fa-chevron-down text-sm"></i>
+    </button>
+
+    <!-- DROPDOWN CONTENT -->
+    <div id="mobileHomeDrop" class="hidden pl-4">
+      <a href="home2.html" class="block py-2 hover:text-cyan-300">Home 2</a>
+    </div>
+
+      <a href="about.html" class="nav-link hover:text-cyan-400">About</a>
+      <a href="services.html" class="nav-link hover:text-cyan-400">Services</a>
+      <a href="Dashboard.html" class="hover:text-cyan-300">dashboard📊</a>
+      <a href="contact.html" class="nav-link hover:text-cyan-400">Contact📞</a>
+
+      <!-- ACTIVE CONTACT MOBILE -->
+      <a href="contact.html" class="active-link">Contact</a>
+
+      <a href="login.html" class="text-cyan-300 font-semibold mt-2">Login</a>
+    </div>
+  </nav>
+<main class="pt-32">
+
+<script>
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburgerBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+  function toggleMobileDrop() {
+  const drop = document.getElementById("mobileHomeDrop");
+  drop.classList.toggle("hidden");
+}
+
+</script>
+  <!-- ================= HERO ================= -->
+  <section
+  class="relative min-h-[72vh] flex items-center bg-cover bg-center"
+  style="background-image: url('job.webp');">
+
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <div class="relative z-10 max-w-6xl w-full mx-auto px-6 text-center">
+
+    <!-- White Box -->
+    <div class="inline-block border border-white px-10 py-10 rounded-md fade-scale"
+         style="animation-delay:.15s">
+
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-white">
+         Staffing & Recruiting 
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-gray-200 text-lg fade-up" style="animation-delay:.3s">
+      We connect companies with the best talent – fast, reliable, and professional staffing support.      </p>
+
+    </div>
+</section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staffing & Recruiting</title>
+
+<style>
+
+/* ==== GLOBAL BODY ANIMATION BACKGROUND ==== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Floating neon particles */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,255,200,0.12), transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: float 10s infinite linear;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  left: auto;
+  right: -150px;
+  top: 300px;
+  animation: float2 14s infinite linear;
+}
+
+@keyframes float {
+  from { transform: translateY(0px) rotate(0deg); }
+  to   { transform: translateY(80px) rotate(360deg); }
+}
+
+@keyframes float2 {
+  from { transform: translateY(0px) rotate(0deg); }
+  to   { transform: translateY(-80px) rotate(-360deg); }
+}
+
+/* HEADER (not animated) */
+header {
+  padding: 20px;
+  text-align: center;
+  background: #0a0a0a;
+  border-bottom: 1px solid #222;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+/* FOOTER (not animated) */
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+  margin-top: 100px;
+  color: #999;
+}
+
+/* SECTION TITLES */
+h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #0aff9d;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 5px;
+  animation: underlineGlow 2s infinite ease-in-out;
+}
+
+@keyframes underlineGlow {
+  0%   { width: 40px; opacity: 0.5; }
+  50%  { width: 90px; opacity: 1; }
+  100% { width: 40px; opacity: 0.5; }
+}
+
+/* SECTION FADE-IN EFFECT */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeIn 1.2s ease forwards;
+  padding: 60px 20px;
+}
+
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.4s; }
+section:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SERVICES GRID */
+.services {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+}
+
+.service-box {
+  background: #111;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  transition: 0.3s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 0 20px rgba(0,255,150,0.2);
+}
+
+/* JOBS BOX */
+.jobs-box {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #111;
+  padding: 40px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 0 20px rgba(0, 255, 160, 0.1);
+}
+
+.job-card {
+  margin-bottom: 25px;
+  transition: 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0,255,150,0.2);
+}
+
+.job-card h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.job-card p {
+  opacity: 0.8;
+  font-size: 15px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+</header>
+
+<!-- ABOUT SECTION -->
+<section>
+  <h2>About Our Agency</h2>
+  <p style="max-width:800px;margin:0 auto;text-align:center;font-size:18px;opacity:0.8;">
+    We provide professional staffing and recruitment services for IT and Non-IT companies.
+    Our goal is to connect top talent with leading companies through a smooth hiring process.
+  </p>
+</section>
+
+<!-- SERVICES SECTION -->
+<section>
+  <h2>Our Services</h2>
+
+  <div class="services">
+
+    <div class="service-box"><h3>IT Staffing</h3><p>Hire skilled developers, analysts, testers & IT support.</p></div>
+    <div class="service-box"><h3>Non-IT Hiring</h3><p>Sales, Admin, HR, Finance, Marketing & more.</p></div>
+    <div class="service-box"><h3>Contract Staffing</h3><p>On-demand project employees for quick scaling.</p></div>
+    <div class="service-box"><h3>Bulk Hiring</h3><p>Mass recruitment for BPO, startups, MNCs.</p></div>
+    <div class="service-box"><h3>Executive Search</h3><p>Leadership & senior management hiring.</p></div>
+    <div class="service-box"><h3>Campus Recruitment</h3><p>College drives & internship placements.</p></div>
+    <div class="service-box"><h3>Payroll Outsourcing</h3><p>End-to-end payroll management solutions.</p></div>
+    <div class="service-box"><h3>HR Consulting</h3><p>Building HR policies, onboarding, employee care.</p></div>
+
+  </div>
+</section>
+
+<!-- JOB SECTION -->
+<section>
+  <h2>Latest Job Openings</h2>
+
+  <div class="jobs-box">
+
+    <div class="job-card"><h3>Software Developer</h3><p>Location: Chennai • 2+ Years Experience</p></div>
+    <div class="job-card"><h3>HR Recruiter</h3><p>Location: Hyderabad • Freshers Welcome</p></div>
+    <div class="job-card"><h3>UI/UX Designer</h3><p>Location: Remote • 1+ Year Experience</p></div>
+    <div class="job-card"><h3>Frontend Developer (React)</h3><p>Location: Bangalore • 1–3 Years</p></div>
+    <div class="job-card"><h3>Customer Support Executive</h3><p>Location: Chennai • Freshers/Experienced</p></div>
+    <div class="job-card"><h3>Digital Marketing Specialist</h3><p>Location: Pune • 1–4 Years</p></div>
+    <div class="job-card"><h3>Business Analyst</h3><p>Location: Hyderabad • 2+ Years</p></div>
+    <div class="job-card"><h3>Java Developer</h3><p>Location: Remote • 2–5 Years</p></div>
+
+  </div>
+</section>
+
+<footer class="bg-[#0c0016] text-gray-300 py-16 px-6">
+
+  <div class="max-w-6xl mx-auto">
+
+    <!-- GRID -->
+    <div class="grid md:grid-cols-3 gap-12 items-start text-center md:text-left">
+
+      <!-- LEFT -->
+      <div>
+        <img src="stackly.webp" class="w-40 mx-auto md:mx-0 mb-3" />
+          Get your business engaged
+        </p>
+      </div>
+
+      <!-- CENTER -->
+      <div class="md:border-l md:border-gray-700 md:pl-10">
+        <h4 class="text-xl font-semibold text-white mb-4 tracking-wide">Main</h4>
+
+        <ul class="space-y-3 text-gray-300 text-sm">
+          <li><a href="index.html" class="hover:text-white">Home </a></li>
+          <li><a href="about.html" class="hover:text-white">About</a></li>
+          <li><a href="service.html" class="hover:text-white">Service</a></li>
+          <li><a href="Dashboard.html" class="hover:text-white">dashboard📊</a></li>
+          <li><a href="contact.html" class="hover:text-white">Contact📞</a></li>
+        </ul>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="md:border-l md:border-gray-700 md:pl-10">
+        <h4 class="text-xl font-semibold text-white mb-4 tracking-wide">Social</h4>
+
+        <ul class="space-y-3 text-gray-300 text-sm">
+          <li><i class="fa-brands fa-facebook mr-2"></i> <a href="404.html" class="hover:text-white">Facebook</a></li>
+          <li><i class="fa-brands fa-twitter mr-2"></i> <a href="404.html" class="hover:text-white">Twitter</a></li>
+          <li><i class="fa-brands fa-linkedin mr-2"></i> <a href="404.html" class="hover:text-white">LinkedIn</a></li>
+          <li><i class="fa-brands fa-instagram mr-2"></i> <a href="404.html" class="hover:text-white">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="text-center text-gray-500 text-sm mt-12 border-t border-gray-800 pt-6">
+      © Stackly – 2025. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+<script>
+const sections = document.querySelectorAll("section");
+
+function reveal() {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      sec.style.opacity = "1";
+      sec.style.transform = "translateY(0)";
+    }
+  });
+}
+
+window.addEventListener("scroll", reveal);
+reveal();
+</script>
+
+</body>
+</html>
