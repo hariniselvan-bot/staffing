@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stackly Header</title>
+<title>Stackly Glass Header</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
@@ -16,7 +16,7 @@
 }
 
 body{
-  background:#0b0f2a; /* demo bg */
+  background:#0b0f2a;
   min-height:100vh;
 }
 
@@ -30,7 +30,7 @@ body{
   z-index:999;
 }
 
-/* ================= HEADER ================= */
+/* ================= HEADER (GLASS) ================= */
 .header{
   width:calc(100% - 60px);
   max-width:1400px;
@@ -40,25 +40,15 @@ body{
   align-items:center;
   justify-content:space-between;
 
-  background:linear-gradient(
-    90deg,
-    #6a11cb,
-    #2575fc,
-    rgba(255,165,0,.5)
-  );
-
+  /* 🔥 GLASS EFFECT */
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.18);
   border-radius:22px;
   box-shadow:0 30px 70px rgba(0,0,0,.45);
-  backdrop-filter:blur(18px);
 }
 
 /* ================= LOGO ================= */
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
 .logo img{
   height:48px;
 }
@@ -74,14 +64,13 @@ body{
   text-decoration:none;
   color:#fff;
   font-weight:600;
-  position:relative;
 }
 
 .nav a:hover{
-  color:#00eaff;
+  color:#22d3ee;
 }
 
-/* DROPDOWN */
+/* DROPDOWN (DESKTOP) */
 .dropdown{
   position:relative;
 }
@@ -90,10 +79,11 @@ body{
   position:absolute;
   top:130%;
   left:0;
-  background:#000;
+  background:#020617;
   border-radius:14px;
   display:none;
-  min-width:150px;
+  min-width:160px;
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
 }
 
 .dropdown:hover .dropdown-menu{
@@ -108,7 +98,7 @@ body{
 
 /* LOGIN */
 .login-btn{
-  background:#ff5a1f;
+  background:#22d3ee;
   color:#000;
   padding:10px 22px;
   border-radius:14px;
@@ -118,7 +108,7 @@ body{
 /* ================= HAMBURGER ================= */
 .hamburger{
   display:none;
-  background:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.18);
   border:none;
   width:44px;
   height:44px;
@@ -137,22 +127,42 @@ body{
   top:120px;
   left:20px;
   right:20px;
-  background:rgba(0,0,0,.92);
+
+  /* 🔥 NOT TRANSPARENT */
+  background:#020617;
   border-radius:20px;
-  padding:24px;
+  padding:26px;
+
   display:none;
+  z-index:998;
 }
 
 .mobile-menu.open{
   display:block;
 }
 
-.mobile-menu a{
+.mobile-menu a,
+.mobile-drop-btn{
   display:block;
+  width:100%;
   padding:14px 0;
   color:#fff;
   text-decoration:none;
   font-weight:600;
+  background:none;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+}
+
+/* MOBILE DROPDOWN */
+.mobile-drop{
+  display:none;
+  padding-left:16px;
+}
+
+.mobile-drop.open{
+  display:block;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -166,6 +176,7 @@ body{
     justify-content:center;
   }
 }
+
 </style>
 </head>
 
@@ -180,10 +191,12 @@ body{
       <img src="stackly.webp" alt="Stackly Logo">
     </a>
 
-    <!-- NAV -->
+    <!-- DESKTOP NAV -->
     <nav class="nav">
       <div class="dropdown">
-        <a href="home2.html">Home 2<i class="fa-solid fa-chevron-down"></i></a>
+        <a href="home2.html">
+          Home 2 <i class="fa-solid fa-chevron-down"></i>
+        </a>
         <div class="dropdown-menu">
           <a href="index.html">Home 1</a>
         </div>
@@ -193,7 +206,6 @@ body{
       <a href="j4.html">Job</a>
       <a href="FAQ.html">FAQ</a>
       <a href="contact.html">Contact</a>
-
       <a href="login.html" class="login-btn">LOGIN</a>
     </nav>
 
@@ -207,23 +219,40 @@ body{
 
 <!-- ================= MOBILE MENU ================= -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="dashboard.html">Dashboard</a>
+
+  <!-- MOBILE DROPDOWN -->
+  <button class="mobile-drop-btn" id="mobileDropBtn">
+    Home 2 <i class="fa-solid fa-chevron-down"></i>
+  </button>
+
+  <div class="mobile-drop" id="mobileDrop">
+    <a href="index.html">Home 1</a>
+  </div>
+
+  <a href="about1.html">About</a>
+  <a href="j4.html">Job</a>
+  <a href="FAQ.html">FAQ</a>
   <a href="contact.html">Contact</a>
-  <a href="login.html" style="color:#ff5a1f">LOGIN</a>
+  <a href="login.html" style="color:#22d3ee">LOGIN</a>
 </div>
 
 <script>
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const mobileMenu = document.getElementById("mobileMenu");
+const mobileDropBtn = document.getElementById("mobileDropBtn");
+const mobileDrop = document.getElementById("mobileDrop");
 
 hamburgerBtn.onclick = () => {
   mobileMenu.classList.toggle("open");
 };
+
+mobileDropBtn.onclick = () => {
+  mobileDrop.classList.toggle("open");
+};
 </script>
 
+</body>
+</html>
 
 <style>
 *{
@@ -234,6 +263,7 @@ hamburgerBtn.onclick = () => {
 }
 
 body{
+  background:#05070f;
   overflow-x:hidden;
 }
 
@@ -246,11 +276,11 @@ body{
   color:#fff;
 }
 
-/* 🔁 BACKGROUND SLIDES */
+/* ===== BACKGROUND SLIDES ===== */
 .hero-bg{
   position:absolute;
   inset:0;
-  z-index:-2;
+  z-index:-3;
 }
 
 .hero-bg img{
@@ -260,23 +290,32 @@ body{
   height:100%;
   object-fit:cover;
   opacity:0;
-  transition:opacity 1.6s ease;
+  transition:opacity 1.5s ease;
 }
 
 .hero-bg img.active{
   opacity:1;
 }
 
-/* 🔴 CURVED OVERLAY */
+/* ===== DARK OVERLAY ===== */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:-2;
+}
+
+/* ===== RED CURVE ===== */
 .hero-overlay{
   position:absolute;
   inset:0;
-  background:#7a0d0d; /* recruitment red */
-  clip-path:ellipse(75% 100% at 0% 50%);
+  background:#7a0d0d;
+  clip-path:ellipse(55% 100% at 0% 50%);
   z-index:-1;
 }
 
-/* ================= CONTENT ================= */
+/* ===== CONTENT ===== */
 .hero-content{
   max-width:620px;
   padding-left:8%;
@@ -305,50 +344,7 @@ body{
   margin-bottom:32px;
 }
 
-.hero-content button{
-  background:#ff2d2d;
-  border:none;
-  color:#fff;
-  padding:14px 36px;
-  font-size:16px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:600;
-}
-
-.hero-content button:hover{
-  background:#e61f1f;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .hero-overlay{
-    clip-path:none;
-  }
-
-  .hero{
-    justify-content:center;
-    text-align:center;
-  }
-
-  .hero-content{
-    padding:60px 8%;
-  }
-
-  .hero-content h1{
-    font-size:34px;
-  }
-}
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  background:#7a0d0d;
-
-  /* 👇 reduced width */
-  clip-path: ellipse(55% 100% at 0% 50%);
-
-  z-index:-1;
-}
+/* BUTTON */
 .hire-btn{
   display:inline-block;
   padding:14px 36px;
@@ -365,6 +361,53 @@ body{
   transform:translateY(-2px);
 }
 
+/* ================= TABLET ================= */
+@media(max-width:900px){
+  .hero{
+    min-height:auto;
+    padding:140px 0 90px;
+    justify-content:center;
+    text-align:center;
+  }
+
+  .hero-overlay{
+    clip-path:none;
+    background:rgba(122,13,13,.85);
+  }
+
+  .hero-content{
+    padding:0 8%;
+  }
+
+  .hero-content h1{
+    font-size:36px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+  .hero-content{
+    padding:0 6%;
+  }
+
+  .hero-content h1{
+    font-size:28px;
+    line-height:1.25;
+  }
+
+  .hero-content p{
+    font-size:14px;
+  }
+
+  .badge{
+    font-size:11px;
+  }
+
+  .hire-btn{
+    padding:12px 26px;
+    font-size:14px;
+  }
+}
 </style>
 </head>
 
@@ -372,15 +415,15 @@ body{
 
 <section class="hero">
 
-  <!-- 🔁 STAFFING BACKGROUND IMAGES -->
+  <!-- BACKGROUND IMAGES -->
   <div class="hero-bg">
-    <!-- Replace with recruitment images -->
+    <!-- 🔁 replace with your images -->
     <img src="css.webp" class="active">
     <img src="placement.webp">
     <img src="skill.webp">
   </div>
 
-  <!-- 🔴 RED CURVE OVERLAY -->
+  <!-- RED OVERLAY -->
   <div class="hero-overlay"></div>
 
   <!-- CONTENT -->
@@ -399,23 +442,22 @@ body{
       smart hiring solutions.
     </p>
 
-   <a href="contact.html" class="hire-btn">
-  Hire Talent
-</a>
-
+    <a href="contact.html" class="hire-btn">
+      Hire Talent
+    </a>
   </div>
 
 </section>
 
 <script>
-/* 🔁 BACKGROUND IMAGE LOOP */
+/* BACKGROUND IMAGE SLIDER */
 const slides = document.querySelectorAll('.hero-bg img');
-let i = 0;
+let index = 0;
 
 setInterval(() => {
-  slides[i].classList.remove('active');
-  i = (i + 1) % slides.length;
-  slides[i].classList.add('active');
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
 }, 4000);
 </script>
 
@@ -539,6 +581,158 @@ body{
     max-width:320px;
   }
 }
+/* ===== SECTION BASE ===== */
+.section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:90px 8%;
+}
+
+/* tablet */
+@media(max-width:1024px){
+  .section{
+    min-height:auto;
+    padding:80px 6%;
+  }
+}
+
+.section-inner{
+  display:flex;
+  align-items:center;
+  gap:80px;
+  max-width:1300px;
+  margin:auto;
+}
+
+/* ===== TEXT ===== */
+.section-text{
+  flex:1;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+
+.section-text h1{
+  font-size:48px;
+  font-weight:700;
+  margin-bottom:24px;
+}
+
+.section-text p{
+  font-size:16px;
+  line-height:1.8;
+  color:#d1d5db;
+  margin-bottom:20px;
+}
+
+/* ===== IMAGE ===== */
+.section-img{
+  flex:1;
+  opacity:0;
+  transition:1.2s ease;
+}
+
+.section-img img{
+  width:100%;
+  max-width:520px;
+  border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+/* ===== LEFT IMAGE ===== */
+.left-img{
+  transform:translateX(-120px);
+}
+
+/* ===== RIGHT IMAGE ===== */
+.right-img{
+  transform:translateX(120px);
+}
+
+/* ===== ACTIVE ===== */
+.show .section-text{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.show .left-img,
+.show .right-img{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* ===== BUTTON ===== */
+.section-btn{
+  margin-top:30px;
+  padding:14px 40px;
+  background:#22d3ee;
+  border:none;
+  border-radius:40px;
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.section-btn:hover{
+  background:#06b6d4;
+}
+
+/* ================= MOBILE FIX ================= */
+@media(max-width:900px){
+
+  .section{
+    padding:70px 6%;
+  }
+
+  .section-inner{
+    flex-direction:column;
+    gap:40px;              /* 🔥 reduced gap */
+    text-align:center;
+  }
+
+  /* stop horizontal slide on mobile */
+  .left-img,
+  .right-img{
+    transform:translateY(40px);
+  }
+
+  .show .left-img,
+  .show .right-img{
+    transform:translateY(0);
+  }
+
+  .section-text h1{
+    font-size:32px;
+  }
+
+  .section-text p{
+    font-size:14px;
+  }
+
+  .section-img img{
+    max-width:300px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media(max-width:480px){
+
+  .section{
+    padding:60px 5%;
+  }
+
+  .section-text h1{
+    font-size:26px;
+  }
+
+  .section-btn{
+    padding:12px 28px;
+    font-size:14px;
+  }
+}
+
 </style>
 </head>
 
