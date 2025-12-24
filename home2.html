@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stackly Header</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins, sans-serif;
+}
+
+body{
+  background:#0b0f2a; /* demo bg */
+  min-height:100vh;
+}
+
+/* ================= HEADER WRAPPER ================= */
+.header-wrapper{
+  position:fixed;
+  top:20px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  z-index:999;
+}
+
+/* ================= HEADER ================= */
+.header{
+  width:calc(100% - 60px);
+  max-width:1400px;
+  height:90px;
+  padding:0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  background:linear-gradient(
+    90deg,
+    #6a11cb,
+    #2575fc,
+    rgba(255,165,0,.5)
+  );
+
+  border-radius:22px;
+  box-shadow:0 30px 70px rgba(0,0,0,.45);
+  backdrop-filter:blur(18px);
+}
+
+/* ================= LOGO ================= */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo img{
+  height:48px;
+}
+
+/* ================= NAV ================= */
+.nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+.nav a{
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+  position:relative;
+}
+
+.nav a:hover{
+  color:#00eaff;
+}
+
+/* DROPDOWN */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-menu{
+  position:absolute;
+  top:130%;
+  left:0;
+  background:#000;
+  border-radius:14px;
+  display:none;
+  min-width:150px;
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
+}
+
+.dropdown-menu a{
+  display:block;
+  padding:12px 16px;
+  font-size:14px;
+}
+
+/* LOGIN */
+.login-btn{
+  background:#ff5a1f;
+  color:#000;
+  padding:10px 22px;
+  border-radius:14px;
+  font-weight:700;
+}
+
+/* ================= HAMBURGER ================= */
+.hamburger{
+  display:none;
+  background:rgba(255,255,255,.2);
+  border:none;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.hamburger i{
+  color:#fff;
+  font-size:22px;
+}
+
+/* ================= MOBILE MENU ================= */
+.mobile-menu{
+  position:fixed;
+  top:120px;
+  left:20px;
+  right:20px;
+  background:rgba(0,0,0,.92);
+  border-radius:20px;
+  padding:24px;
+  display:none;
+}
+
+.mobile-menu.open{
+  display:block;
+}
+
+.mobile-menu a{
+  display:block;
+  padding:14px 0;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1117px){
+  .nav{
+    display:none;
+  }
+  .hamburger{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<div class="header-wrapper">
+  <header class="header">
+
+    <!-- LOGO -->
+    <a href="index.html" class="logo">
+      <img src="stackly.webp" alt="Stackly Logo">
+    </a>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="dropdown">
+        <a href="home2.html">Home 2<i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="index.html">Home 1</a>
+        </div>
+      </div>
+
+      <a href="about1.html">About</a>
+      <a href="j4.html">Job</a>
+      <a href="FAQ.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+
+      <a href="login.html" class="login-btn">LOGIN</a>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button class="hamburger" id="hamburgerBtn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </header>
+</div>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html" style="color:#ff5a1f">LOGIN</a>
+</div>
+
+<script>
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+hamburgerBtn.onclick = () => {
+  mobileMenu.classList.toggle("open");
+};
+</script>
+
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  color:#fff;
+}
+
+/* 🔁 BACKGROUND SLIDES */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+}
+
+.hero-bg img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1.6s ease;
+}
+
+.hero-bg img.active{
+  opacity:1;
+}
+
+/* 🔴 CURVED OVERLAY */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:#7a0d0d; /* recruitment red */
+  clip-path:ellipse(75% 100% at 0% 50%);
+  z-index:-1;
+}
+
+/* ================= CONTENT ================= */
+.hero-content{
+  max-width:620px;
+  padding-left:8%;
+}
+
+.badge{
+  display:inline-block;
+  background:#ff2d2d;
+  padding:7px 16px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:22px;
+  letter-spacing:1px;
+}
+
+.hero-content h1{
+  font-size:50px;
+  line-height:1.2;
+  margin-bottom:22px;
+}
+
+.hero-content p{
+  font-size:16px;
+  line-height:1.7;
+  opacity:.9;
+  margin-bottom:32px;
+}
+
+.hero-content button{
+  background:#ff2d2d;
+  border:none;
+  color:#fff;
+  padding:14px 36px;
+  font-size:16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.hero-content button:hover{
+  background:#e61f1f;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .hero-overlay{
+    clip-path:none;
+  }
+
+  .hero{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .hero-content{
+    padding:60px 8%;
+  }
+
+  .hero-content h1{
+    font-size:34px;
+  }
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:#7a0d0d;
+
+  /* 👇 reduced width */
+  clip-path: ellipse(55% 100% at 0% 50%);
+
+  z-index:-1;
+}
+.hire-btn{
+  display:inline-block;
+  padding:14px 36px;
+  background:#ff3b2f;
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.hire-btn:hover{
+  background:#e12e23;
+  transform:translateY(-2px);
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+  <!-- 🔁 STAFFING BACKGROUND IMAGES -->
+  <div class="hero-bg">
+    <!-- Replace with recruitment images -->
+    <img src="css.webp" class="active">
+    <img src="placement.webp">
+    <img src="skill.webp">
+  </div>
+
+  <!-- 🔴 RED CURVE OVERLAY -->
+  <div class="hero-overlay"></div>
+
+  <!-- CONTENT -->
+  <div class="hero-content">
+    <span class="badge">STAFFING & RECRUITMENT</span>
+
+    <h1>
+      Connecting Talent<br>
+      With the Right<br>
+      Opportunities
+    </h1>
+
+    <p>
+      We help companies find skilled professionals and
+      job seekers build successful careers through
+      smart hiring solutions.
+    </p>
+
+   <a href="contact.html" class="hire-btn">
+  Hire Talent
+</a>
+
+  </div>
+
+</section>
+
+<script>
+/* 🔁 BACKGROUND IMAGE LOOP */
+const slides = document.querySelectorAll('.hero-bg img');
+let i = 0;
+
+setInterval(() => {
+  slides[i].classList.remove('active');
+  i = (i + 1) % slides.length;
+  slides[i].classList.add('active');
+}, 4000);
+</script>
+
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#0b0f1a;
+  color:#ffffff;
+  overflow-x:hidden;
+}
+
+/* ===== SECTION BASE ===== */
+.section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:90px 8%;
+}
+
+.section-inner{
+  display:flex;
+  align-items:center;
+  gap:80px;
+  max-width:1300px;
+  margin:auto;
+}
+
+/* ===== TEXT ===== */
+.section-text{
+  flex:1;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+
+.section-text h1{
+  font-size:48px;
+  font-weight:700;
+  margin-bottom:24px;
+}
+
+.section-text p{
+  font-size:16px;
+  line-height:1.8;
+  color:#d1d5db;
+  margin-bottom:20px;
+}
+
+/* ===== IMAGE ===== */
+.section-img{
+  flex:1;
+  opacity:0;
+  transition:1.2s ease;
+}
+
+.section-img img{
+  width:100%;
+  max-width:520px;
+  border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+/* ===== LEFT IMAGE ===== */
+.left-img{
+  transform:translateX(-120px);
+}
+
+/* ===== RIGHT IMAGE ===== */
+.right-img{
+  transform:translateX(120px);
+}
+
+/* ===== ACTIVE ===== */
+.show .section-text{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.show .left-img,
+.show .right-img{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* ===== BUTTON ===== */
+.section-btn{
+  margin-top:30px;
+  padding:14px 40px;
+  background:#22d3ee;
+  border:none;
+  border-radius:40px;
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.section-btn:hover{
+  background:#06b6d4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .section-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .section-text h1{
+    font-size:34px;
+  }
+
+  .section-img img{
+    max-width:320px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= STAFFING SOLUTIONS ================= -->
+<section class="section reveal">
+  <div class="section-inner">
+
+    <!-- IMAGE LEFT -->
+    <div class="section-img left-img">
+      <!-- replace image -->
+      <img src="it.webp" alt="Staffing Solutions">
+    </div>
+
+    <!-- TEXT RIGHT -->
+    <div class="section-text">
+      <h1>Staffing Solutions</h1>
+
+      <p>
+        Our services leverage deep industry knowledge, vast professional
+        networks, and state-of-the-art technology to identify and place top
+        talent efficiently.
+      </p>
+
+      <p>
+        From initial candidate screening to final placement, our comprehensive
+        approach ensures a seamless staffing process, freeing our clients to
+        focus on their core business operations.
+      </p>
+
+      <p>
+        We prioritize long-term relationships with both clients and candidates,
+        offering insights, employer branding support, and post-placement
+        assistance.
+      </p>
+
+      <button class="section-btn" onclick="location.href='contact.html'">
+        Hire Talent
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= RECRUITMENT SOLUTIONS ================= -->
+<section class="section reveal">
+  <div class="section-inner">
+
+    <!-- TEXT LEFT -->
+    <div class="section-text">
+      <h1>Recruitment Solutions</h1>
+
+      <p>
+        At BEST Recruitment Agency, our premier recruitment services deliver
+        customized solutions to address the unique needs of businesses and
+        job seekers.
+      </p>
+
+      <p>
+        We combine deep industry expertise, vast networks, and cutting-edge
+        technology to identify and connect with top-tier talent swiftly.
+      </p>
+
+      <p>
+        Our end-to-end support ensures a smooth and efficient hiring process,
+        helping businesses build strong, skilled teams.
+      </p>
+
+      <button class="section-btn" onclick="location.href='contact.html'">
+        Hire Talent
+      </button>
+    </div>
+
+    <!-- IMAGE RIGHT -->
+    <div class="section-img right-img">
+      <!-- replace image -->
+      <img src="abt.webp" alt="Recruitment Solutions">
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* ===== SCROLL REVEAL ===== */
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{ threshold:0.3 });
+
+reveals.forEach(el=>observer.observe(el));
+</script>
+
+
+<style>
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#05070f;
+  color:#fff;
+}
+
+/* ================= SERVICES SECTION ================= */
+.services{
+  padding:100px 8%;
+  background:
+    radial-gradient(circle at top, rgba(0,255,255,.15), transparent 45%),
+    linear-gradient(180deg,#080b1c,#04060d);
+}
+
+/* HEADER */
+.services-header{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 90px;
+}
+
+.services-header h2{
+  font-size:44px;
+  font-weight:700;
+}
+
+.services-header p{
+  margin-top:14px;
+  font-size:16px;
+  color:#cbd5e1;
+}
+
+/* GRID */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:42px;
+}
+
+/* ================= CARD ================= */
+.service-card{
+  position:relative;
+  border-radius:28px;
+  padding:26px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.25);
+
+  opacity:1;
+  transform:translateY(50px);
+  transition:
+    transform .7s ease,
+    box-shadow .6s ease;
+  overflow:hidden;
+}
+
+/* MOVING GRADIENT BORDER */
+.service-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:30px;
+  background:linear-gradient(
+    120deg,
+    #22d3ee,
+    #6366f1,
+    #22d3ee
+  );
+  background-size:300% 300%;
+  animation:borderMove 6s linear infinite;
+  z-index:-1;
+  opacity:.85;
+}
+
+@keyframes borderMove{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
+}
+
+/* REVEAL */
+.service-card.reveal{
+  transform:translateY(0);
+}
+
+/* STAGGER */
+.service-card:nth-child(1){transition-delay:.15s}
+.service-card:nth-child(2){transition-delay:.3s}
+.service-card:nth-child(3){transition-delay:.45s}
+
+/* HOVER */
+.service-card:hover{
+  transform:translateY(-14px) scale(1.03);
+  box-shadow:
+    0 0 0 1px rgba(0,255,255,.6),
+    0 0 55px rgba(0,255,255,.55);
+}
+
+/* ================= ICON ================= */
+.service-icon{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin-bottom:20px;
+  background:linear-gradient(135deg,#22d3ee,#6366f1);
+  box-shadow:0 0 25px rgba(99,102,241,.6);
+}
+
+/* IMAGE */
+.service-img{
+  height:210px;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px;
+  background:linear-gradient(135deg,#0ea5e9,#22d3ee);
+}
+
+.service-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* TEXT */
+.service-card h3{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.service-card p{
+  font-size:15px;
+  color:#d1d5db;
+  line-height:1.6;
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .services-grid{
+    grid-template-columns:1fr;
+  }
+
+  .services-header h2{
+    font-size:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<section class="services">
+
+  <div class="services-header">
+    <h2>Top Recruitment Services</h2>
+    <p>
+      Providing manpower solutions for all types of businesses.
+      We are the best in the industry.
+    </p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- CARD 1 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+<div class="service-img">
+  <img src="Hr.webp" alt="Recruitment Service">
+</div>
+      <h3>Quality Recruitment Solutions</h3>
+      <p>
+        Our recruitment services are tailored to meet
+        the specific needs of your business.
+      </p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fa-solid fa-people-group"></i>
+      </div>
+<div class="service-img">
+  <img src="hr1.webp" alt="Recruitment Service">
+</div>
+      <h3>Expert Manpower Services</h3>
+      <p>
+        Trust our agency to provide you with the right
+        talent for your business success.
+      </p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+<div class="service-img">
+  <img src="hr2.webp" alt="Recruitment Service">
+</div>
+      <h3>Professional Staffing Solutions</h3>
+      <p>
+        Tailored recruitment solutions to help your
+        business thrive in a competitive market.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+/* SCROLL REVEAL */
+const cards=document.querySelectorAll('.service-card');
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('reveal');
+    }
+  });
+},{threshold:.15});
+
+cards.forEach(card=>observer.observe(card));
+
+/* FORCE SHOW (SAFETY) */
+window.addEventListener('load',()=>{
+  cards.forEach(card=>card.classList.add('reveal'));
+});
+</script>
+</body>
+</html>
+
+
+<style>
+.footer{
+  background:radial-gradient(circle at top, #1b0030, #070010);
+  color:#cfd3ff;
+  padding:60px 8% 20px;
+  font-family:'Poppins', sans-serif;
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:60px;
+  align-items:flex-start;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+/* BRAND */
+.brand .logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:700;
+  color:#9ad8ff;
+}
+
+.logo-icon{
+  font-size:26px;
+}
+
+.brand p{
+  margin-top:14px;
+  color:#b9b9ff;
+  font-size:15px;
+}
+
+/* COLUMNS */
+.footer-col h4{
+  font-size:18px;
+  margin-bottom:16px;
+  color:#ffffff;
+}
+
+.footer-col ul{
+  list-style:none;
+}
+
+.footer-col ul li{
+  margin-bottom:10px;
+}
+
+.footer-col a{
+  color:#cfd3ff;
+  text-decoration:none;
+  font-size:15px;
+  transition:.3s;
+}
+
+.footer-col a:hover{
+  color:#6ae3ff;
+  padding-left:6px;
+}
+
+/* SOCIAL */
+.social i{
+  margin-right:10px;
+}
+
+/* BOTTOM */
+.footer-bottom{
+  text-align:center;
+  padding-top:20px;
+  font-size:14px;
+  color:#9aa0ff;
+}
+.footer-logo{
+  height:42px;        /* adjust if needed */
+  width:auto;
+  display:block;
+}
+
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .brand .logo{
+    justify-content:center;
+  }
+}
+</style>
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-col brand">
+       <div class="logo">
+  <img src="stackly.webp" alt="Stackly Logo" class="footer-logo">
+</div>
+
+      <p>Get your business engaged</p>
+    </div>
+
+    <!-- CENTER -->
+    <div class="footer-col">
+      <h4>Main</h4>
+      <ul>
+        <li><a href="home2.html" class="hover:text-white">Home </a></li>
+          <li><a href="about1.html" class="hover:text-white">About</a></li>
+          <li><a href="job.html" class="hover:text-white">Job listings</a></li>
+          <li><a href="FAQ.html" class="hover:text-white">FAQ</a></li>
+          <li><a href="contact.html" class="hover:text-white">Contact📞</a></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="footer-col">
+      <h4>Social</h4>
+      <ul class="social">
+        <li><a href="404.html"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+        <li><a href="404.html"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="404.html"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+        <li><a href="404.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © Stackly – 2025. All rights reserved.
+  </div>
+</footer>
